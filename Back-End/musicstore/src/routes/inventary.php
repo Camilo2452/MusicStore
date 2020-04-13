@@ -21,7 +21,7 @@ $app->get('/api/inventary/searchall', function(Request $request, Response $respo
         echo json_encode($inventary);
 
     } catch(PDOException $e){
-        echo '{"Error": {"Code": 100, "Response": "'.$e->getMessage().'"}}';
+        echo '{"Error": {"Code": 400, "Response": "'.$e->getMessage().'"}}';
     }
 });
 
@@ -45,7 +45,7 @@ $app->get('/api/inventary/search/{id}', function(Request $request, Response $res
         echo json_encode($inventary);
         
     } catch(PDOException $e){
-        echo '{"Error": {"Code": 100, "Response": "'.$e->getMessage().'"}}';
+        echo '{"Error": {"Code": 400, "Response": "'.$e->getMessage().'"}}';
     }
 });
 
@@ -75,9 +75,9 @@ $app->post('/api/inventary/save', function(Request $request, Response $response)
         $stmt->bindParam(':referencia',              $referencia);
         $stmt->bindParam(':cantidad',                $cantidad);
         $stmt->execute();
-        echo '{"Info": {"Code": 0, "Reponse": "Transaccion Exitosa"}}';
+        echo '{"Info": {"Code": 200, "Reponse": "Transaccion Exitosa"}}';
     } catch(PDOException $e){
-        echo '{"Error": {"Code": 100, "Response": "'.$e->getMessage().'"}}';
+        echo '{"Error": {"Code": 400, "Response": "'.$e->getMessage().'"}}';
     }
 });
 
@@ -116,9 +116,9 @@ $app->put('/api/inventary/edit/{id}', function(Request $request, Response $respo
         $stmt->bindParam(':referencia',     $referencia);     
         $stmt->bindParam(':cantidad',       $cantidad);
         $stmt->execute();
-        echo '{"Info": {"Code": 0, "Reponse": "Instrumento Actualizado Exitosamente"}}';
+        echo '{"Info": {"Code": 200, "Reponse": "Instrumento Actualizado Exitosamente"}}';
     } catch(PDOException $e){
-        echo '{"Error": {"Code": 100, "Response": "'.$e->getMessage().'"}}';
+        echo '{"Error": {"Code": 400, "Response": "'.$e->getMessage().'"}}';
     }
 });
 
@@ -136,8 +136,8 @@ $app->delete('/api/inventary/delete/{id}', function(Request $request, Response $
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $db = null;
-        echo '{"Info": {"Code": 0, "Reponse": "Registro Eliminado Correctamente"}}';
+        echo '{"Info": {"Code": 200, "Reponse": "Registro Eliminado Correctamente"}}';
     } catch(PDOException $e){
-        echo '{"Error": {"Code": 100, "Response": "'.$e->getMessage().'"}}';
+        echo '{"Error": {"Code": 400, "Response": "'.$e->getMessage().'"}}';
     }
 });
